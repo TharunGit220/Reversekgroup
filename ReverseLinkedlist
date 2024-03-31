@@ -1,0 +1,29 @@
+public static Node reversekgroup(Node head,int k){
+        Node temp = head;
+        Node prev = null;
+        Node nextnode = null;
+
+        while (temp != null) {
+            Node kthnode = findkthnode(temp,k); 
+
+            if (kthnode == null) {
+                if (prev != null) {
+                    prev.next = temp;
+                }
+                break;
+            }
+            nextnode = kthnode.next;
+            kthnode.next = null;
+            Node newhead = reverse(temp);
+            
+            if (temp == head) {
+                head = newhead;
+            }
+            else{
+                prev.next = newhead;
+            }
+            prev = temp;
+            temp = nextnode;
+        }
+        return head;
+    }
